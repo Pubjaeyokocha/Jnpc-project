@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "JNPC Enterprise"
+description = "A customer-facing website for JNPC Enterprise, a painting and decorative wall-finishing business serving Phake, Mpumalanga, with clear service information and direct contact options."
+version = "1.0.0"
+id = "artifacts/jnpc-enterprise"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 23039
+
+[services.development]
+run = "pnpm --filter @workspace/jnpc-enterprise run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/jnpc-enterprise", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/jnpc-enterprise/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "23039"
+BASE_PATH = "/"
