@@ -1,23 +1,41 @@
 import { useState } from 'react';
-import { ArrowDown, ArrowRight, Brush, Layers, Mail, MapPin, Menu, Paintbrush, Phone, Sparkles, X } from 'lucide-react';
-import brandImage from './assets/jnpc-brand-reference.jpg';
+import { ArrowDown, ArrowRight, Brush, Building2, Layers, Mail, MapPin, Menu, Paintbrush, Palette, Phone, Sparkles, X } from 'lucide-react';
 import { Route, Switch } from 'wouter';
 import NotFound from '@/pages/not-found';
 
 const phone = '+27 72 748 3518';
 const waLink = 'https://wa.me/27727483518';
-const email = 'lorainechauke730@gmail.com';
+const email = 'info@jnpcprojects.co.za';
 const address = '664 Phake Rankaila, Phake, Mpumalanga 0414';
 
-function ContactLinks({ compact = false }: { compact?: boolean }) {
-  return (
-    <div className={compact ? 'flex flex-wrap gap-3' : 'flex flex-col gap-3'}>
-      <a data-testid="link-phone" href="tel:+27727483518" className="contact-row"><Phone size={17} /><span>{phone}</span></a>
-      <a data-testid="link-whatsapp" href={waLink} target="_blank" rel="noreferrer" className="contact-row"><MessageIcon /><span>Chat on WhatsApp</span></a>
-      <a data-testid="link-email" href={`mailto:${email}`} className="contact-row"><Mail size={17} /><span>{email}</span></a>
-    </div>
-  );
-}
+const services = [
+  { title: 'Interior Painting', description: 'Refresh interior walls with colour chosen for your space.', icon: Paintbrush },
+  { title: 'Exterior Painting', description: 'Give exterior surfaces a clean, considered finish.', icon: Brush },
+  { title: 'Gamazine', description: 'Add decorative texture and depth with Gamazine wall finishes.', icon: Layers },
+  { title: 'Stucco / Textured Finishes', description: 'Explore tactile finishes that bring dimension to a wall.', icon: Layers },
+  { title: 'Feature Walls', description: 'Create a focal point with a distinctive wall finish.', icon: Sparkles },
+  { title: 'Commercial Work', description: 'Painting and finishing for offices, shops and business spaces.', icon: Building2 },
+  { title: 'Colour Consultation', description: 'Talk through colours and finishes before choosing your look.', icon: Palette },
+];
+
+// Replace these public SVG files with real project photos when they are available.
+const galleryItems = [
+  { src: '/gallery/gamazine-01.svg', alt: 'Gamazine gallery photo placeholder one', label: 'Gamazine finish · 01' },
+  { src: '/gallery/gamazine-02.svg', alt: 'Gamazine gallery photo placeholder two', label: 'Gamazine finish · 02' },
+  { src: '/gallery/gamazine-03.svg', alt: 'Gamazine gallery photo placeholder three', label: 'Gamazine finish · 03' },
+  { src: '/gallery/painting-01.svg', alt: 'Painting gallery photo placeholder one', label: 'Painting finish · 01' },
+  { src: '/gallery/painting-02.svg', alt: 'Painting gallery photo placeholder two', label: 'Painting finish · 02' },
+  { src: '/gallery/painting-03.svg', alt: 'Painting gallery photo placeholder three', label: 'Painting finish · 03' },
+];
+
+const testimonials = [
+  { quote: '[Short quote about quality work]', name: '[Client Name]', location: '[Location]' },
+  { quote: '[Short quote about attention to detail]', name: '[Client Name]', location: '[Location]' },
+  { quote: '[Short quote about the finished space]', name: '[Client Name]', location: '[Location]' },
+];
+
+const serviceWhatsAppLink = (service: string) =>
+  `${waLink}?text=${encodeURIComponent(`Hello, I would like to enquire about ${service}.`)}`;
 
 function MessageIcon() {
   return <span aria-hidden="true" className="wa-mark">WA</span>;
@@ -29,7 +47,7 @@ function Home() {
   return (
     <main className="min-h-[100dvh] bg-[#f5f1e8] text-[#201d18]">
       <div className="topline">
-        <a href="tel:+27727483518" className="topline-link"><Phone size={13} /> <span>{phone}</span></a>
+        <a data-testid="header-email" href={`mailto:${email}`} className="topline-link"><Mail size={13} /> <span>{email}</span></a>
         <span className="topline-note">Locally based in Phake, Mpumalanga</span>
         <a href={waLink} target="_blank" rel="noreferrer" className="topline-link">Talk to us on WhatsApp <ArrowRight size={13} /></a>
       </div>
@@ -43,6 +61,7 @@ function Home() {
         </button>
         <nav className={`main-nav ${menuOpen ? 'nav-open' : ''}`}>
           <a href="#services" onClick={closeMenu}>Our services</a>
+          <a href="#work" onClick={closeMenu}>Our work</a>
           <a href="#approach" onClick={closeMenu}>The JNPC touch</a>
           <a href="#contact" onClick={closeMenu}>Contact</a>
           <a href={waLink} target="_blank" rel="noreferrer" className="nav-cta" onClick={closeMenu}>Start a conversation <ArrowRight size={15} /></a>
@@ -62,8 +81,7 @@ function Home() {
         </div>
         <div className="hero-art">
           <div className="hero-image-frame">
-            <img src={brandImage} alt="JNPC Enterprise brand artwork with decorative finishes, paint and contact details" />
-            <div className="image-index"><span>01</span><i /> FINISHING TOUCHES</div>
+            <img src="/jnpc-luxury-interior-wall.jpg" alt="Luxury living room with a warm textured feature wall" />
           </div>
           <div className="hero-stamp"><span>JNPC</span><small>GAMAZINE<br />GLAMOUR<br />& PAINT</small><i><Sparkles size={17} /></i></div>
           <div className="hero-side-note">A fresh perspective<br />for every surface</div>
@@ -90,27 +108,52 @@ function Home() {
           <p>Whether you’re refreshing a room or giving a wall a new dimension, we help bring your idea to life.</p>
         </div>
         <div className="service-list">
-          <article className="service-item">
-            <div className="service-number">01</div><div className="service-icon"><Paintbrush size={23} strokeWidth={1.5} /></div>
-            <div className="service-copy"><h3>Painting</h3><p>Interior and exterior painting for residential and commercial spaces. A new colour can shift the whole mood of a room.</p></div>
-            <a href={`${waLink}?text=${encodeURIComponent('Hello JNPC Enterprise, I would like to enquire about painting.')}`} className="service-arrow" target="_blank" rel="noreferrer" aria-label="Enquire about painting"><ArrowRight size={19} /></a>
-          </article>
-          <article className="service-item">
-            <div className="service-number">02</div><div className="service-icon"><Layers size={23} strokeWidth={1.5} /></div>
-            <div className="service-copy"><h3>Decorative & textured finishes</h3><p>Gamazine and decorative wall treatments that bring depth, detail and an expressive finish to your walls.</p></div>
-            <a href={`${waLink}?text=${encodeURIComponent('Hello JNPC Enterprise, I would like to enquire about decorative and textured wall finishes.')}`} className="service-arrow" target="_blank" rel="noreferrer" aria-label="Enquire about decorative finishes"><ArrowRight size={19} /></a>
-          </article>
-          <article className="service-item">
-            <div className="service-number">03</div><div className="service-icon"><Brush size={23} strokeWidth={1.5} /></div>
-            <div className="service-copy"><h3>Residential & commercial</h3><p>Work for the everyday places that matter—your home, workplace, shop or business interior.</p></div>
-            <a href={`${waLink}?text=${encodeURIComponent('Hello JNPC Enterprise, I would like to discuss a residential or commercial project.')}`} className="service-arrow" target="_blank" rel="noreferrer" aria-label="Enquire about residential and commercial work"><ArrowRight size={19} /></a>
-          </article>
+          {services.map((service, index) => {
+            const Icon = service.icon;
+            return (
+              <article className="service-item" key={service.title}>
+                <div className="service-number">{String(index + 1).padStart(2, '0')}</div>
+                <div className="service-icon"><Icon size={23} strokeWidth={1.5} /></div>
+                <div className="service-copy"><h3>{service.title}</h3><p>{service.description}</p></div>
+                <a data-testid={`service-enquire-${index + 1}`} href={serviceWhatsAppLink(service.title)} className="service-arrow" target="_blank" rel="noreferrer" aria-label={`Enquire about ${service.title} on WhatsApp`}><ArrowRight size={19} /></a>
+              </article>
+            );
+          })}
+        </div>
+        <p className="service-pricing-note">Pricing from <strong>R___/m²</strong> — final quote depends on wall size and finish. <a href={`${waLink}?text=${encodeURIComponent('Hello, I would like a free quote for my wall finishing project.')}`} target="_blank" rel="noreferrer">Message us for a free quote.</a></p>
+      </section>
+
+      <section id="work" className="work-section">
+        <div className="work-heading">
+          <div><p className="eyebrow dark-eyebrow"><span className="eyebrow-line" /> A CLOSER LOOK</p><h2 className="serif">Our <em>Work.</em></h2></div>
+          <p>Project photographs will be added here as the gallery grows.</p>
+        </div>
+        <div className="work-grid">
+          <h3 className="work-group-label">Before / After — Gamazine</h3>
+          {galleryItems.slice(0, 3).map((item, index) => (
+            <figure className="work-card" key={item.src}>
+              <div className={`work-image work-image-${index + 1}`}>
+                <img src={item.src} alt={item.alt} />
+                <span className="placeholder-badge">PLACEHOLDER PHOTO</span>
+              </div>
+              <figcaption>{item.label}</figcaption>
+            </figure>
+          ))}
+          <h3 className="work-group-label">Before / After — Painting</h3>
+          {galleryItems.slice(3).map((item, index) => (
+            <figure className="work-card" key={item.src}>
+              <div className={`work-image work-image-${index + 4}`}>
+                <img src={item.src} alt={item.alt} />
+                <span className="placeholder-badge">PLACEHOLDER PHOTO</span>
+              </div>
+              <figcaption>{item.label}</figcaption>
+            </figure>
+          ))}
         </div>
       </section>
 
       <section id="approach" className="approach-section">
-        <div className="approach-image">
-          <img src={brandImage} alt="JNPC paint, tools and finished interiors" />
+        <div className="approach-image" aria-hidden="true">
           <span className="photo-label">DETAIL IS THE DIFFERENCE</span>
         </div>
         <div className="approach-copy">
@@ -132,6 +175,22 @@ function Home() {
         </div>
       </section>
 
+      <section id="testimonials" className="testimonials-section">
+        <div className="testimonials-heading">
+          <p className="eyebrow dark-eyebrow">KIND WORDS, TO COME</p>
+          <h2 className="serif">What Our <em>Clients Say.</em></h2>
+        </div>
+        <div className="testimonial-grid">
+          {testimonials.map((testimonial, index) => (
+            <article className="testimonial-card" key={testimonial.quote}>
+              <span className="testimonial-number">0{index + 1}</span>
+              <p className="testimonial-quote">“{testimonial.quote}”</p>
+              <p className="testimonial-byline">{testimonial.name} <span>—</span> {testimonial.location}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
       <section id="contact" className="contact-section">
         <div className="contact-heading">
           <p className="eyebrow"><span className="eyebrow-line" /> YOUR NEXT CHAPTER STARTS HERE</p>
@@ -139,12 +198,9 @@ function Home() {
           <p>Have a room in mind, a colour question, or a textured finish you’ve been thinking about? We’d love to hear from you.</p>
           <a href={waLink} target="_blank" rel="noreferrer" className="button button-gold">Message us on WhatsApp <ArrowRight size={16} /></a>
         </div>
-        <div className="contact-details">
-          <span className="section-number">GET IN TOUCH</span>
-          <div className="contact-divider" />
-          <ContactLinks />
-          <div className="address-block"><MapPin size={18} /><div><small>FIND US</small><address>{address}</address></div></div>
-          <a className="map-link" href="https://maps.google.com/?q=664+Phake+Rankaila,+Phake,+Mpumalanga+0414" target="_blank" rel="noreferrer">Open address in Maps <ArrowRight size={14} /></a>
+        <div className="contact-email">
+          <span className="section-number">EMAIL JNPC</span>
+          <a data-testid="contact-email" href={`mailto:${email}`}><Mail size={17} />{email}</a>
         </div>
       </section>
 
@@ -154,7 +210,12 @@ function Home() {
       <footer className="footer">
         <a href="#home" className="brand-lockup footer-brand" aria-label="Back to top"><span className="brand-monogram">J<span>N</span>PC</span><span className="brand-caption">ENTERPRISE <i /></span></a>
         <p>Bringing glamour to every surface.</p>
-        <div className="footer-links"><a href={`tel:+27727483518`}>Call JNPC</a><a href={`mailto:${email}`}>Email</a><a href={waLink} target="_blank" rel="noreferrer">WhatsApp</a></div>
+        <div className="footer-contact">
+          <a data-testid="footer-phone" href="tel:+27727483518"><Phone size={14} />{phone}</a>
+          <a data-testid="footer-email" href={`mailto:${email}`}><Mail size={14} />{email}</a>
+          <address><MapPin size={14} />{address}</address>
+          <a data-testid="footer-whatsapp" href={waLink} target="_blank" rel="noreferrer">WhatsApp <ArrowRight size={13} /></a>
+        </div>
         <span className="copyright">© JNPC Enterprise</span>
       </footer>
       <a href={waLink} target="_blank" rel="noreferrer" className="floating-contact" aria-label="Chat with JNPC Enterprise on WhatsApp"><MessageIcon /><span>Let’s talk</span></a>

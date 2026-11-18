@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 650">
+  <defs>
+    <linearGradient id="wall" x2=".9" y2="1"><stop stop-color="#b8ad9d"/><stop offset=".55" stop-color="#968875"/><stop offset="1" stop-color="#796b5b"/></linearGradient>
+    <pattern id="grain" width="42" height="32" patternUnits="userSpaceOnUse"><path d="M0 17c11-12 21 9 42-5M10 31c8-8 17-3 27-10" fill="none" stroke="#f2e6d0" stroke-opacity=".17" stroke-width="3"/></pattern>
+  </defs>
+  <rect width="900" height="535" fill="url(#wall)"/><rect width="900" height="535" fill="url(#grain)"/>
+  <rect y="535" width="900" height="115" fill="#5c4935"/>
+  <path d="M0 535h900m-790 0 60 115m170-115 10 115m240-115-22 115m235-115-62 115" stroke="#cab692" stroke-opacity=".26" stroke-width="4"/>
+  <path d="M584 535V280a116 116 0 0 1 232 0v255" fill="#a08f76" stroke="#d8c7a6" stroke-width="8"/>
+  <path d="M606 535V281a94 94 0 0 1 188 0v254" fill="#7f725f"/>
+  <rect x="74" y="405" width="302" height="22" rx="4" fill="#382e25"/><rect x="95" y="427" width="260" height="95" fill="#78654c"/>
+  <path d="M112 452h225m-225 31h225" stroke="#cbb997" stroke-opacity=".4" stroke-width="5"/>
+</svg>

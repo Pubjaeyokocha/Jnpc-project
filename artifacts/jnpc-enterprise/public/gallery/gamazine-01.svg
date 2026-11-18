@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 650">
+  <defs>
+    <linearGradient id="wall" x2="1" y2="1"><stop stop-color="#d9cfbd"/><stop offset="1" stop-color="#bcae96"/></linearGradient>
+    <pattern id="grain" width="34" height="26" patternUnits="userSpaceOnUse"><path d="M2 8c8-5 16 4 27-2M-4 21c9-5 17 4 31-2" fill="none" stroke="#75654c" stroke-opacity=".16" stroke-width="2"/></pattern>
+    <linearGradient id="floor" y2="1"><stop stop-color="#8d7454"/><stop offset="1" stop-color="#594533"/></linearGradient>
+  </defs>
+  <rect width="900" height="540" fill="url(#wall)"/><rect width="900" height="540" fill="url(#grain)"/>
+  <rect y="540" width="900" height="110" fill="url(#floor)"/>
+  <path d="M0 543h900M80 545l-35 105m235-105-15 105m260-105 16 105m238-105 34 105" stroke="#d5c3a5" stroke-opacity=".3" stroke-width="3"/>
+  <rect x="58" y="78" width="13" height="375" fill="#382e24"/><rect x="71" y="89" width="165" height="344" fill="#a6b3ac"/>
+  <path d="M145 89v344M71 253h165" stroke="#e4dccd" stroke-width="10"/>
+  <rect x="629" y="430" width="190" height="17" rx="3" fill="#3a3024"/><path d="M650 447v80m150-80v80" stroke="#3a3024" stroke-width="14"/>
+</svg>

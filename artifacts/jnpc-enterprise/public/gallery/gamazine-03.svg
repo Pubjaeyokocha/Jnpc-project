@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 650">
+  <defs>
+    <linearGradient id="wall" x2="0" y2="1"><stop stop-color="#e0d7c8"/><stop offset="1" stop-color="#c2b39b"/></linearGradient>
+    <pattern id="grain" width="28" height="28" patternUnits="userSpaceOnUse"><circle cx="5" cy="8" r="2" fill="#816d4e" fill-opacity=".22"/><circle cx="19" cy="20" r="3" fill="#fff" fill-opacity=".28"/><path d="M0 24l12-7m5-16 11 6" stroke="#806d50" stroke-opacity=".13" stroke-width="2"/></pattern>
+  </defs>
+  <rect width="900" height="540" fill="url(#wall)"/><rect width="900" height="540" fill="url(#grain)"/>
+  <rect y="540" width="900" height="110" fill="#66523c"/>
+  <rect x="570" y="94" width="245" height="300" fill="#877a67" stroke="#e8decd" stroke-width="12"/>
+  <rect x="595" y="120" width="195" height="245" fill="#adb9b1"/>
+  <path d="M692 120v245M595 243h195" stroke="#e6dfd3" stroke-width="10"/>
+  <path d="M70 450h330m-305 0v85m280-85v85" stroke="#33291e" stroke-width="16"/>
+  <path d="M100 432q56-92 112 0m18 0q55-75 110 0" fill="#b19365" stroke="#493a2b" stroke-width="6"/>
+</svg>
